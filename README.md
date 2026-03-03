@@ -1,5 +1,7 @@
 # Mainline Sovol Zero (Klipper, Armbian Trixie)
 
+Special thanks to: Teapot-Apple, matt73210, Atomique13 SV08|ZERO|A1M, jedi 2^10, Rappetor, and others of the discord coming together to share information!
+
 ---
 
 ## Initial Setup
