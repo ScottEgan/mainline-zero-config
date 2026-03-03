@@ -1,6 +1,6 @@
 # Mainline Sovol Zero (Klipper, Armbian Trixie)
 
-Special thanks to: Teapot-Apple, matt73210, Atomique13, jedi 2^10, Rappetor, and others of the discord coming together to share information!
+Special thanks to: Teapot-Apple, matt73210, Atomique13, jedi 2^10, @wildBill, Rappetor, and others of the discord coming together to share information!
 
 ---
 
@@ -206,24 +206,36 @@ Note the 1 CANBUS ID that changed here, that's your new mainboard ID:
 
 ### Method Two
 
-1. Use STM32CubeProgrammer to flash the `stm32h750_katapult.bin` file to your mainboard. Turn off your printer (unplug it too, just in case), hook your st-link up to the boards pins, other end to your computer, full chip erase, open file -> use stm32h750_katapult.bin, "Download" will write the file
+1. Edit `~/klipper/src/stm32/Kconfig`  
+You will then scroll down until you see bootloader and then scroll down til you see "config STM32_FLASH_START_8000"  
+you will then need to add `MACH_STM32H750` to the end of the line under that as such:
 
-2. Upon boot, you can verify with `ls /dev/serial/by-id`, should see something like `usb-katapult_stm32h750xx_1C0027000651333233353131-if00`
+From:  
+`bool "32KiB bootloader" if MACH_STM32F1 || MACH_STM32F2 || MACH_STM32F4 || MACH_STM32F7`  
+To:  
+`bool "32KiB bootloader" if MACH_STM32F1 || MACH_STM32F2 || MACH_STM32F4 || MACH_STM32F7 || MACH_STM32H750`  
 
-3.  Stop Klipper `sudo service klipper stop`, then flash:
+Note, this will make Kalico or Klipper repo Dirty.  
+Thanks to wildBill on the discord for this info.  
+
+2. Use STM32CubeProgrammer to flash the `stm32h750_katapult.bin` file to your mainboard. Turn off your printer (unplug it too, just in case), hook your st-link up to the boards pins, other end to your computer, full chip erase, open file -> use stm32h750_katapult.bin, "Download" will write the file
+
+3. Upon boot, you can verify with `ls /dev/serial/by-id`, should see something like `usb-katapult_stm32h750xx_1C0027000651333233353131-if00`
+
+4.  Stop Klipper `sudo service klipper stop`, then flash:
 ```
 python3 ~/katapult/scripts/flashtool.py -f ~/klipper/out/klipper.bin -d /dev/serial/by-id/usb-katapult_your_board_id
 so for me it was:
 python3 ~/katapult/scripts/flashtool.py -f ~/klipper/out/klipper.bin -d /dev/serial/by-id/usb-katapult_stm32h750xx_1C0027000651333233353131-if00
 ```
 
-4.  Verify with:
+5.  Verify with:
 ``lsusb``
 Should see: ``Bus 008 Device 003: ID 1d50:606f OpenMoko, Inc. Geschwister Schneider CAN adapter``
 
-5. Verify can0 is up, run `ip -s -d link show can0`, it should show `5: can0: <NOARP,UP,LOWER_UP,ECHO> mtu 16 qdisc pfifo_fast state UP mode DEFAULT group default qlen 128`
+6. Verify can0 is up, run `ip -s -d link show can0`, it should show `5: can0: <NOARP,UP,LOWER_UP,ECHO> mtu 16 qdisc pfifo_fast state UP mode DEFAULT group default qlen 128`
 
-6. To get your ID for printer.cfg, run: `python3 ~/katapult/scripts/flashtool.py -i can0 -q` and note the new ID.
+7. To get your ID for printer.cfg, run: `python3 ~/katapult/scripts/flashtool.py -i can0 -q` and note the new ID.
 
 **Mainboard**
 ```
