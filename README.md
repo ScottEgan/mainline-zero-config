@@ -297,6 +297,8 @@ Note the 1 CANBUS ID that changed here, that's the ID of the device you just fla
 If you mess up and forget to check, you can turn the printer off, unplug the toolhead CAN connection, boot it back up, run the query, and the new ID is your chamber heater.  
 Power down, plug toolhead CAN connection back in, query again, and that new ID is your toolhead.  
 
+3. Once you have everything flashed, start klipper back up: `sudo service klipper start`
+
 Credit for this section:  
 Esoterical  
 https://canbus.esoterical.online/Getting_Started.html  
