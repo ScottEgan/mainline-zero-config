@@ -52,9 +52,14 @@ ljg-dev (https://github.com/ljg-dev/sovol-sv08-mainline/tree/main)
 ## Installing Stuff 
 
 1. Via KIAUH, install Klipper, Moonraker, Mainsail, and Crowsnest  
-Note you will also need `python3-serial` (`sudo apt install python3-serial`) and to do `~/klippy-env/bin/pip install scipy` (scipy is used for eddy we set up later)  
 
-2. Install moonraker-timelapse:  
+Reboot after Crowsnest
+
+I also installed `KIAUH main menu -> Advanced -> Extra Dependencies: -> [Input Shaper]`  
+
+Note you will also need `python3-serial` (`sudo apt install python3-serial`) and to do `~/klippy-env/bin/pip install scipy` (scipy is used for eddy we set up later)
+
+3. Install moonraker-timelapse:  
 ```
 cd ~/
 git clone https://github.com/mainsail-crew/moonraker-timelapse.git
