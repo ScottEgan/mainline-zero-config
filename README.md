@@ -247,8 +247,24 @@ Just remove everything else there
 `END_PRINT`  
 
 5. Calibrate eddy:  
-You can follow my guide for the SV08 here, it's pretty much the same:  
+Reference my SV08 guide here, but **NOTE** that there are some significant changes:  
 https://github.com/asnajder/sv08-config/blob/main/README.md  
+
+-No need to edit `ldc1612.py`, it seems to work fine with div=2
+-You can remove `reg_drive_current: 22` from `[probe_eddy_current my_eddy_probe]`, we will auto calibrate
+
+Additional short form steps:
+```
+# home the printer, it will fail on Z, that's ok
+SET_KINEMATIC_POSITION X=96 Y=76.2 Z=2
+# baby step it (manually move it to around z=2 if you can)
+LDC_CALIBRATE_DRIVE_CURRENT CHIP=my_eddy_probe
+# save_config after it finds the current, mine was set to 16
+# after reboot:
+SET_KINEMATIC_POSITION X=96 Y=76.2 Z=2
+PROBE_EDDY_CURRENT_CALIBRATE CHIP=my_eddy_probe
+# do paper test, etc
+```
 
 Just note that setting the kinematic position you will want to do within bounds of the Zero bed size, and of course in "How to use it", we don't QGL, etc  
 
