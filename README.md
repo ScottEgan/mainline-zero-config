@@ -144,23 +144,23 @@ CANBus UUID Query Complete
 biqu@Zero:~$
 ```  
 
-You should see your CANBUS devices here, if you don't, something above was done wrong, OR, you were like me, and had a hard time seeing them, take my info on how to see them.  
+You should see your CANBUS devices here, if you don't, something above was done wrong, OR, you were like me, and had a hard time seeing them, take my info on how to see them above.  
 
-7. Edit "~/klipper/src/stm32/Kconfig"  
+7. Edit `~/klipper/src/stm32/Kconfig`  
 You will then scroll down until you see bootloader and then scroll down til you see "config STM32_FLASH_START_20000"  
-you will then need to add `MACH_STM32H750` to the end of the line under that as such:  
+you will then need to add `MACH_STM32H750` to the end of the line under that as such:
+
 From:  
 `bool "128KiB bootloader" if MACH_STM32H743 || MACH_STM32H723 || MACH_STM32F7`  
-
 To:  
 `bool "128KiB bootloader" if MACH_STM32H743 || MACH_STM32H723 || MACH_STM32F7 || MACH_STM32H750`  
 
 Note, this will make Kalico or Klipper repo Dirty.  
 Thanks to Teapot-Apple on the discord for this info.  
 
-
 ## Make Klipper Configs
 
+This is the info to reference when you do `make menuconfig` below.
 **Mainboard**
 ```
 config:
