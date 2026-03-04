@@ -190,11 +190,11 @@ To:
 Note, this will make Kalico or Klipper repo Dirty.  
 Thanks to Teapot-Apple on the discord for this info.  
 
-1.For the mainboard, reference the menuconfig settings above. Then,   
+2. For the mainboard, reference the menuconfig settings above. Then,   
 `cd ~/klipper`, `make menuconfig`, `make clean`, `make`  
 It will save the firmware to `~/klipper/out/klipper.bin`  
 
-2. Flash your mainboard:  
+3. Flash your mainboard:  
 `sudo service klipper stop`, then `python3 ~/katapult/scripts/flashtool.py -i can0 -q`, this lists all CANBUS IDs, in my case mainboard was `0d1445047cdd`  
 
 Flash it:  
@@ -208,6 +208,18 @@ Note the 1 CANBUS ID that changed here, that's your new mainboard ID:
 
 ### Method Two
 
+**Mainboard**
+```
+make menuconfig reference:
+STM32H750
+32KiB bootloader offset
+Clock Reference: 25 MHz crystal
+USB to CAN bus bridge (USB on PA11/PA12)
+CAN bus on PB8/PB9
+GPIO pins to set at micro-controller startup: !PE11,!PB0
+These are the aux and exhaust fans. If this isn't set, both of these will come on full blast at boot until Kalico takes control of the board
+```
+
 1. Edit `~/klipper/src/stm32/Kconfig`  
 You will then scroll down until you see bootloader and then scroll down til you see "config STM32_FLASH_START_8000"  
 you will then need to add `MACH_STM32H750` to the end of the line under that as such:
@@ -220,36 +232,28 @@ To:
 Note, this will make Kalico or Klipper repo Dirty.  
 Thanks to wildBill on the discord for this info.  
 
-2. Use STM32CubeProgrammer to flash the `stm32h750_katapult.bin` file to your mainboard (found [here](./sovol_zero-recovery_files/stm32h750_katapult.bin)). Turn off your printer (unplug it too, just in case), hook your st-link up to the boards pins, other end to your computer, full chip erase, open file -> use stm32h750_katapult.bin, "Download" will write the file
+2. For the mainboard, reference the menuconfig settings above. Then,   
+`cd ~/klipper`, `make menuconfig`, `make clean`, `make`  
+It will save the firmware to `~/klipper/out/klipper.bin`  
 
-3. Upon boot, you can verify with `ls /dev/serial/by-id`, should see something like `usb-katapult_stm32h750xx_1C0027000651333233353131-if00`
+3. Use STM32CubeProgrammer to flash the `stm32h750_katapult.bin` file to your mainboard (found [here](./sovol_zero-recovery_files/stm32h750_katapult.bin)). Turn off your printer (unplug it too, just in case), hook your st-link up to the boards pins, other end to your computer, full chip erase, open file -> use stm32h750_katapult.bin, "Download" will write the file
 
-4.  Stop Klipper `sudo service klipper stop`, then flash:
+4. Upon boot, you can verify with `ls /dev/serial/by-id`, should see something like `usb-katapult_stm32h750xx_1C0027000651333233353131-if00`
+
+5.  Stop Klipper `sudo service klipper stop`, then flash:
 ```
 python3 ~/katapult/scripts/flashtool.py -f ~/klipper/out/klipper.bin -d /dev/serial/by-id/usb-katapult_your_board_id
 so for me it was:
 python3 ~/katapult/scripts/flashtool.py -f ~/klipper/out/klipper.bin -d /dev/serial/by-id/usb-katapult_stm32h750xx_1C0027000651333233353131-if00
 ```
 
-5.  Verify with:
+6.  Verify with:
 ``lsusb``
 Should see: ``Bus 008 Device 003: ID 1d50:606f OpenMoko, Inc. Geschwister Schneider CAN adapter``
 
-6. Verify can0 is up, run `ip -s -d link show can0`, it should show `5: can0: <NOARP,UP,LOWER_UP,ECHO> mtu 16 qdisc pfifo_fast state UP mode DEFAULT group default qlen 128`
+7. Verify can0 is up, run `ip -s -d link show can0`, it should show `5: can0: <NOARP,UP,LOWER_UP,ECHO> mtu 16 qdisc pfifo_fast state UP mode DEFAULT group default qlen 128`
 
-7. To get your ID for printer.cfg, run: `python3 ~/katapult/scripts/flashtool.py -i can0 -q` and note the new ID.
-
-**Mainboard**
-```
-make menuconfig reference:
-STM32H750
-32KiB bootloader offset
-Clock Reference: 25 MHz crystal
-USB to CAN bus bridge (USB on PA11/PA12)
-CAN bus on PB8/PB9
-GPIO pins to set at micro-controller startup: !PE11,!PB0
-These are the aux and exhaust fans. If this isn't set, both of these will come on full blast at boot until Kalico takes control of the board
-```
+8. To get your ID for printer.cfg, run: `python3 ~/katapult/scripts/flashtool.py -i can0 -q` and note the new ID.
 
 > [!IMPORTANT]  
 > Carry on to **Make Klipper Configs for Toolhead and Chamber Heater**
