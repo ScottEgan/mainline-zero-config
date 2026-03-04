@@ -196,7 +196,7 @@ It will save the firmware to `~/klipper/out/klipper.bin`
 `sudo service klipper stop`, then `python3 ~/katapult/scripts/flashtool.py -i can0 -q`, this lists all CANBUS IDs, in my case mainboard was `0d1445047cdd`  
 
 Flash it:  
-`python3 ~/katapult/scripts/flashtool.py -i can0 -f ~/klipper/out/klipper.bin -u 61755fe321ac`  
+`python3 ~/katapult/scripts/flashtool.py -i can0 -f ~/klipper/out/klipper.bin -u 0d1445047cdd`  
 
 Note the 1 CANBUS ID that changed here, that's your new mainboard ID:  
 `python3 ~/katapult/scripts/flashtool.py -i can0 -q`  
