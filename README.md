@@ -18,6 +18,7 @@ overlay_prefix=sun50i-h616
 fdtfile=sun50i-h616-bigtreetech-cb1-emmc.dtb
 rootdev=UUID=YOUR_COPIED_UUID_HERE
 rootfstype=ext4
+overlays=sun50i-h6-uart3 sun50i-h616-ws2812 sun50i-h616-spidev1_1
 usbstoragequirks=0x2537:0x1066:u,0x2537:0x1068:u
 ```  
 
