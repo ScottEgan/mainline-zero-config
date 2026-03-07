@@ -106,7 +106,7 @@ SUBSYSTEM=="net", ACTION=="change|add", KERNEL=="can*"  ATTR{tx_queue_len}="128"
 
 3. Enable the can0 interface and set the speed:  
 ```
-echo -e "[Match]nName=can*nn[CAN]nBitRate=1Mnn[Link]nRequiredForOnline=no" | sudo tee /etc/systemd/network/25-can.network > /dev/null
+echo -e "[Match]\nName=can*\n\n[CAN]\nBitRate=1M\n\n[Link]\nRequiredForOnline=no" | sudo tee /etc/systemd/network/25-can.network > /dev/null
 ```  
 
 Check it with:  
