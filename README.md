@@ -1,6 +1,6 @@
 # Mainline Sovol Zero (Klipper, Armbian Trixie)
 
-Special thanks to: Teapot-Apple, matt73210, Atomique13, jedi 2^10, wildBill, Rappetor, vvuk and others of the discord coming together to share information!
+Special thanks to: Leoboi420, Teapot-Apple, matt73210, Atomique13, jedi 2^10, wildBill, Rappetor, vvuk and others of the discord coming together to share information!
 
 ## Overview
 
@@ -344,7 +344,7 @@ https://canbus.esoterical.online/toolhead_flashing.html
 
 ## If something goes wrong
 
-I have the files uploaded [here](./recovery), each file can be flashed using st-link, which gets you back to Sovol firmware.
+I have the files uploaded (./recovery), each file can be flashed using st-link, which gets you back to Sovol firmware.
 Reference Rappetor's guide Step 6/Step 7 to get you through it.
 
 ---
