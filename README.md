@@ -352,6 +352,7 @@ Just remove everything else there
 `END_PRINT`  
 
 5. Calibrate eddy:
+
 It is recommended to calibrate your eddy at bed temp that you most commonly use, i.e. I print ASA mainly on this printer so I calibrated at bed 90C  
 Reference my SV08 guide here for general instructions, but **NOTE** that there are some significant changes:  
 https://github.com/asnajder/sv08-config/blob/main/README.md
