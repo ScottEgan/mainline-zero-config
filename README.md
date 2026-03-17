@@ -193,7 +193,9 @@ You should see your CANBUS devices here, if you don't, something above was done 
 > [!WARNING]
 > There are two methods going forward to flash your mainboard.
 > 
-> **Method One** is using Sovol's 128KiB offset (which technically we are not sure how it works, since the chip only has 128KiB TOTAL
+> **Method One** is using Sovol's 128KiB offset (which technically we are not sure how it works, since the chip only has ̶1̶2̶8̶K̶i̶B̶)
+> 
+> We found out via brute force and unorthodox methods that the MCU actually appears to have 2MB flash and is likely an STM32H743 variant, not H750.
 > 
 > **Method Two** is using an ST-LINK (or possibly in the future, command line) to flash a 32KiB offset Katapult bootloader, then from command line, flashing Klipper
 >
@@ -204,7 +206,7 @@ You should see your CANBUS devices here, if you don't, something above was done 
 **Mainboard**
 ```
 make menuconfig reference:
-STM32H750
+STM32H743
 128KiB bootloader offset
 Clock Reference: 25 MHz crystal
 USB to CAN bus bridge (USB on PA11/PA12)
@@ -215,18 +217,6 @@ These are the aux and exhaust fans. If this isn't set, both of these will come o
 Credit for this info:  
 Vlad (vvuk)  
 https://github.com/vvuk/printer-configs/wiki/Kalico-on-the-Sovol-Zero  
-
-1. Edit `~/klipper/src/stm32/Kconfig`  
-You will then scroll down until you see bootloader and then scroll down til you see "config STM32_FLASH_START_20000"  
-you will then need to add `MACH_STM32H750` to the end of the line under that as such:
-
-From:  
-`bool "128KiB bootloader" if MACH_STM32H743 || MACH_STM32H723 || MACH_STM32F7`  
-To:  
-`bool "128KiB bootloader" if MACH_STM32H743 || MACH_STM32H723 || MACH_STM32F7 || MACH_STM32H750`  
-
-Note, this will make Kalico or Klipper repo Dirty.  
-Thanks to Teapot-Apple on the discord for this info.  
 
 2. For the mainboard, reference the menuconfig settings above. Then,   
 `cd ~/klipper`, `make menuconfig`, `make clean`, `make`  
@@ -323,7 +313,7 @@ Vlad (vvuk)
 https://github.com/vvuk/printer-configs/wiki/Kalico-on-the-Sovol-Zero  
 
 Now, remake the firmware, but for your toolhead/chamber heater (they both use the same config, but it is DIFFERENT than the mainboard)  
-Repeat steps to flash for toolhead and then for chamber (REMEMBER TO CHANGE UUID IN THE COMMAND!), noting what UUID changes each time using the query command above.
+Repeat steps to flash for toolhead and then for chamber (REMEMBER TO CHANGE UUID IN THE COMMAND!), check which UUID changes each time using the query command above.
 
 1. Reference the menuconfig settings above for toolhead and chamber heater.  
 `cd ~/klipper`, `make menuconfig`, `make clean`, `make`  
@@ -365,7 +355,7 @@ IMO, just start with your printer.cfg, an eddy config, and very basic macros. Yo
 
 1. Change all `canbus_uuid` in your configs to your new ones. Save and restart. Everything should connect.  
 
-2. Add your webcam back, I had to edit `crowsnest.conf` and change `device` to `/dev/v4l/by-id/usb-HHW_microelectronics_Co.__Ltd._MGS1-video-index0`, save, then add the webcam in mainsail.  
+2. Add your webcam back, I had to edit `crowsnest.conf` and change `device` to `/dev/video1`, save, then add the webcam in mainsail.  
 
 3. You can remove `[virtual_sdcard]` location, since there is one in mainsail.cfg  
 
