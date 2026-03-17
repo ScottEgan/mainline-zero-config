@@ -25,21 +25,23 @@ Special thanks to: Leoboi420, Teapot-Apple, matt73210, Atomique13, jedi 2^10, wi
 ## Prerequisites
 
 - 32GB eMMC (stock Sovol 8GB will NOT work).
-- Armbian Imager on a host PC.
+- eMMC reader
+- Armbian Imager on PC.
 - USB keyboard + HDMI monitor (or SSH over Ethernet).
-- ST-LINK adapter (for method two) and basic knowledge of flashing STM32 if you choose this path.
+- ST-LINK and basic knowledge of flashing STM32.
 - Backup of any existing Klipper configs, Moonraker database, G-code files, and timelapses.
 
 ## Safety & Warnings
 
-- Power off and unplug the printer before touching electronics or swapping the eMMC..
+- Power off and unplug the printer before touching electronics or swapping the eMMCs
+- Most things in here can and will brick your printer if you don’t follow this thoroughly, so having an ST-LINK is mandatory (or took the risks, lmao).
 
 ---
 
 ## Initial Setup
 
 1. Backup your config  
-2. Download Armbian Imager, insert your 32GB EMMC (note that Sovol stock 8GB will NOT work), Select BTT (BIQU) Manufacturer, Select BigTreeTech CB1 Board, Select Minimal tab, then Armbian <release date> Trixie cli, then Erase and Flash  
+2. Download Armbian Imager, insert your 32GB eMMC into the eMMC reader (note that Sovol stock 8GB eMMC will NOT work), Select BTT (BIQU) Manufacturer, Select BigTreeTech CB1 Board, Select Minimal tab, then Armbian <release date> Trixie cli, then Erase and Flash  
 3. On the newly flashed eMMC, boot partition,  edit /boot/armbianEnv.txt, COPY your `rootdev=UUID=` (for example, save this line: `rootdev=UUID=938afde5-6689-4a1a-a044-680f6247d523` NOTE that your UUID will be unique to you, and you are copying the NEW UUID, not the old eMMc UUID!) then replace everything else with:  
 ```
 verbosity=1
