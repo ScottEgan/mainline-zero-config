@@ -502,6 +502,24 @@ Credit for CAN flashing workflow:
 
 Recovery files are available in [recovery](./recovery). These can be flashed with ST-LINK to return to Sovol firmware.
 
+
+
+Mainboard pinout ↓
+
+![Mainboard pinout](./Mainboard_pinout.png)
+
+
+
+Toolhead pinout ↓
+
+![Toolhead pinout](./Toolhead_pinout.png)
+
+
+
+Chamber pinout ↓
+
+![Chamber pinout](./Chamber_pinout.png)
+
 Also reference [Rappetor's guide (Step 6/Step 7)](https://github.com/Rappetor/Sovol-SV08-Mainline?tab=readme-ov-file#step-6---stock-firmware-backup) 
 
 ---
