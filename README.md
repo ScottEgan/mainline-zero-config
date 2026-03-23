@@ -573,7 +573,7 @@ END_PRINT
 
 Calibrate at the bed temperature you normally print at. The bed must be heated, never calibrate on a cold bed. (For example, if you print ASA, calibrate at around 90 °C or more)
 
-General reference (with Zero-specific differences):
+General reference (only use as a guide, do not edit `ldc1612.py`, but general steps are similar):
 [asnajder/sv08-config README](https://github.com/asnajder/sv08-config/blob/main/README.md)
 
 Use this repo's `sovol_eddy.cfg` as a baseline and keep software I2C enabled (hardware I2C does not work reliably in this setup).
