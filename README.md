@@ -278,7 +278,7 @@ Klipper:
 
 Sovol's bootloader uses a 128 KiB offset. Through testing, the MCU appears to behave like an STM32H743-class part (2 MB flash behavior), not a strict H750 configuration.
 
-Method A: Prebuilt bins
+### Method A: Prebuilt bins
 
 You can either:
 - Flash `Katapult_Zero_Host_H743_128kb.bin` with ST-LINK, or
@@ -296,7 +296,7 @@ Then flash Klipper to host:
 ~/katapult/scripts/flashtool.py -f Klipper_Zero_Host_H743_128kb.bin -d /dev/ttyACM0
 ```
 
-Method B: Build from source
+### Method B: Build from source
 
 Credit for board-level details:
 - [Vlad (vvuk)](https://github.com/vvuk/printer-configs/wiki/Kalico-on-the-Sovol-Zero)
@@ -309,10 +309,10 @@ STM32H743
 8KiB Application offset
 USB on PA11/PA12 [Katapult]
 Balanced Speed/Size (-O2) [Katapult]
-GPIO pins to set at micro-controller startup: !PE11,!PB0
+GPIO pins to set at micro-controller startup: !PE11,!PB0,!PB14
 ```
 
-`!PE11,!PB0` keeps aux/exhaust fans from blasting at full speed before Klipper takes control.
+`!PE11,!PB0,!PB14` keeps aux/exhaust/K_FAN3 fans from blasting at full speed before Klipper takes control.
 
 Build and flash steps:
 
@@ -354,10 +354,10 @@ STM32H743
 8KiB Application offset
 USB to CAN bus bridge (USB on PA11/PA12) [Klipper]
 CAN bus on PB8/PB9 [Klipper]
-GPIO pins to set at micro-controller startup: !PE11,!PB0
+GPIO pins to set at micro-controller startup: !PE11,!PB0,!PB14
 ```
 
-`!PE11,!PB0` keeps aux/exhaust fans from blasting at full speed before Klipper takes control.
+`!PE11,!PB0,!PB14` keeps aux/exhaust/K_FAN3 fans from blasting at full speed before Klipper takes control.
 
 Build and flash steps:
 
