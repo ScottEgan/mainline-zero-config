@@ -45,7 +45,7 @@ Special thanks to Leoboi420, Teapot-Apple, matt73210, Atomique13, J&B, jedi 2^10
 1. Back up your stock eMMC and any current configs/data.
 
 2. Flash Armbian to the 32GB eMMC using Armbian Imager:
-   - Manufacturer: `BTT (BIQU)`
+   - Manufacturer: `BigTreeTech`
    - Board: `BigTreeTech CB1`
    - Image: `Minimal -> Armbian <release date> Trixie CLI`
    - Then run erase + flash.
@@ -61,7 +61,7 @@ console=both
 disp_mode=1920x1080p60
 overlay_prefix=sun50i-h616
 fdtfile=sun50i-h616-bigtreetech-cb1-emmc.dtb
-rootdev=UUID=YOUR_COPIED_UUID_HERE
+rootdev=<UUID=YOUR_COPIED_UUID_HERE>
 rootfstype=ext4
 overlays=sun50i-h6-uart3 sun50i-h616-ws2812 sun50i-h616-spidev1_1
 usbstoragequirks=0x2537:0x1066:u,0x2537:0x1068:u
