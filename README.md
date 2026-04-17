@@ -298,8 +298,8 @@ Then flash Klipper to host:
 
 ### Method B: Build from source
 
-Credit for board-level details:
-- [Vlad (vvuk)](https://github.com/vvuk/printer-configs/wiki/Kalico-on-the-Sovol-Zero)
+> [!NOTE]
+> Credit for board-level details: [Vlad (vvuk)](https://github.com/vvuk/printer-configs/wiki/Kalico-on-the-Sovol-Zero)
 
 Mainboard Katapult `make menuconfig` reference:
 
@@ -311,8 +311,8 @@ USB on PA11/PA12 [Katapult]
 Balanced Speed/Size (-O2) [Katapult]
 GPIO pins to set at micro-controller startup: !PE11,!PB0,!PB14
 ```
-
-`!PE11,!PB0,!PB14` keeps aux/exhaust/K_FAN3 fans from blasting at full speed before Klipper takes control.
+> [!TIP]
+> `!PE11,!PB0,!PB14` keeps aux/exhaust/K_FAN3 fans from blasting at full speed before Klipper takes control.
 
 Build and flash steps:
 
@@ -357,7 +357,8 @@ CAN bus on PB8/PB9 [Klipper]
 GPIO pins to set at micro-controller startup: !PE11,!PB0,!PB14
 ```
 
-`!PE11,!PB0,!PB14` keeps aux/exhaust/K_FAN3 fans from blasting at full speed before Klipper takes control.
+> [!TIP]
+> `!PE11,!PB0,!PB14` keeps aux/exhaust/K_FAN3 fans from blasting at full speed before Klipper takes control.
 
 Build and flash steps:
 
@@ -398,8 +399,8 @@ sudo service klipper stop
 
 Toolhead and chamber heater use the same firmware settings, and those settings are different from the mainboard.
 
-Credit:
-- [Vlad (vvuk)](https://github.com/vvuk/printer-configs/wiki/Kalico-on-the-Sovol-Zero)
+> [!NOTE]
+> Credit: [Vlad (vvuk)](https://github.com/vvuk/printer-configs/wiki/Kalico-on-the-Sovol-Zero)
 
 Toolhead/chamber Katapult `make menuconfig` reference:
 
